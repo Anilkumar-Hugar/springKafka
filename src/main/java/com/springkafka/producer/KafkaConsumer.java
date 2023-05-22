@@ -1,15 +1,20 @@
 package com.springkafka.producer;
 
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-@Service
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.stereotype.Component;
+
+import com.springkafka.entity.Person;
+
+@Component
 public class KafkaConsumer {
-	
 	@KafkaListener(topics = "java",groupId = "javagroup")
-	public String recieveMessage(String receivedMessage) {
-		System.out.println("Message received is: "+receivedMessage);
-		return receivedMessage;
+	public List<Person> recieveMessage(@Payload List<Person> person) {
+		//JsonNode data = new ObjectMapper().readTree(person);
+		System.out.println("Message received is: "+person);
+		return person;
 	}
 	
 }

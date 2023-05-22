@@ -1,5 +1,6 @@
 package com.springkafka.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,11 +13,8 @@ import com.springkafka.producer.KafkaProducer;
 @RestController
 @RequestMapping("/kafka")
 public class KafkaController {
+	@Autowired
 	private KafkaProducer kafkaProducer;
-
-	public KafkaController(KafkaProducer kafkaProducer) {
-		this.kafkaProducer = kafkaProducer;
-	}
 
 	@PostMapping("/send")
 	public ResponseEntity<String> sendMessage(@RequestBody Person person) {
