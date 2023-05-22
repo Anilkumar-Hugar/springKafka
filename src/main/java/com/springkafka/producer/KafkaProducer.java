@@ -1,21 +1,17 @@
 package com.springkafka.producer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+import com.springkafka.entity.Person;
+
+@Component
 public class KafkaProducer {
-	static Logger logger=LoggerFactory.getLogger(KafkaProducer.class);
-	private KafkaTemplate<String, String> kafkaTemplate;
+	@Autowired
+	private KafkaTemplate<String, Object> kafkaTemplate;
 
-	KafkaProducer(KafkaTemplate<String, String> kafkaTemplate) {
-		this.kafkaTemplate = kafkaTemplate;
-	}
-
-	public void sendMsg(String msg) {
-		logger.info("message sent");
-		kafkaTemplate.send("newTopic", msg);
+	public void sendMsg(Person person) {
+		kafkaTemplate.send("java", person);
 	}
 }
