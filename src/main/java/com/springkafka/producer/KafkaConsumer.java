@@ -12,9 +12,12 @@ import com.springkafka.entity.Person;
 public class KafkaConsumer {
 	@KafkaListener(topics = "java",groupId = "javagroup")
 	public List<Person> recieveMessage(@Payload List<Person> person) {
-		//JsonNode data = new ObjectMapper().readTree(person);
 		System.out.println("Message received is: "+person);
 		return person;
 	}
-	
+	@KafkaListener(topics = "java",groupId ="javagroup1")
+	public List<Person> receivedMessage(@Payload List<Person> person){
+		System.out.println("message received to 2nd consumer is: "+person);
+		return person;
+	}
 }
